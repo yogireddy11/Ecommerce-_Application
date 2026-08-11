@@ -17,4 +17,9 @@ export abstract class BasePage {
     protected getLocator(selector: string) {
         return this.page.locator(selector);
     }
+    async scrollToBottom(): Promise<void> {
+    await this.page.evaluate(() => {
+        window.scrollTo(0, document.body.scrollHeight);
+    });
+}
 }

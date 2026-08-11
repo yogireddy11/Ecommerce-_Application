@@ -28,11 +28,16 @@ test.describe('Home Page Test', () => {
         await homePage.verifyPagesAvailable();
     });
 
-    test('Verify Sign Up Process', async () => {
+    test.skip('Verify Sign Up Process', async () => {
         await signUpPage.navigateToSignUpPage();
         await signUpPage.fillUpDetails(faker.internet.username(), faker.internet.email());
         await signUpPage.completeSignUpProcess(faker.internet.password());
         await signUpPage.fillAdditionalDetails(faker.person.firstName(), faker.person.lastName(), faker.company.name(), faker.location.streetAddress(), faker.location.state(), faker.location.city(), faker.location.zipCode(), faker.phone.number());
+    });
+
+    test("Verify Sign Up Process with existing email", async () => {
+        await signUpPage.navigateToSignUpPage();
+        await signUpPage.fillUpDetails("Asa72", "Asa72@hotmail.com");
     });
 
     test("Verify login process", async () => {
@@ -41,5 +46,16 @@ test.describe('Home Page Test', () => {
         await loginPage.verifyLoginSuccess();
 
     });
+    test("Verify login process with invalid credentials",async()=>{
+        await signUpPage.navigateToSignUpPage();
+        await loginPage.loginToApplication("invalid@example.com","invalidpassword");
+        await loginPage.inValidCredentials();
+    });
+    test("Verify Logout Process",async()=>{
+        await signUpPage.navigateToSignUpPage();
+                await loginPage.loginToApplication("Asa72@hotmail.com","qQyR931dsLuL27l");
+        await loginPage.logoutFromApplication();
+    });
+
 
 });

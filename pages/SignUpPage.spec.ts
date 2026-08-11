@@ -97,6 +97,10 @@ export class SignupPage extends BasePage{
 
     }
 
+    async verifySignUpWithExistingEmail(user:string, email:string): Promise<void>{
+
+    }
+
 }
 
 
