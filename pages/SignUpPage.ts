@@ -1,7 +1,7 @@
 import {Page, expect, Locator} from '@playwright/test';
-import {BasePage} from './BasePage.spec';
+import {BasePage} from './BasePage';
 
-export class SignupPage extends BasePage{
+export class SignUpPage extends BasePage{
     private readonly gotoSignPage: Locator;
     private readonly userName: Locator;
     private readonly emailAdd: Locator;

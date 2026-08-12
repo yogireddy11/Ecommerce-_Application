@@ -1,5 +1,5 @@
 import {Page,expect, Locator} from '@playwright/test';
-import { BasePage } from './BasePage.spec';
+import { BasePage } from './BasePage';
 
 export class ProductsPage extends BasePage{
 
@@ -9,6 +9,14 @@ export class ProductsPage extends BasePage{
     private readonly firstProduct :Locator;
     private readonly productInfo : Locator;
 
+    private readonly searchBar :Locator;
+    private readonly searchBtn : Locator;
+    private readonly productCount : Locator;
+
+  
+
+
+
     constructor(page:Page){
         super(page)
         this.products = this.getLocator('a[href="/products"]');
@@ -16,7 +24,13 @@ export class ProductsPage extends BasePage{
         this.fetchAllProducts = this.getLocator('//div[@class="single-products"]/div/div/p');
         this.firstProduct = this.getLocator('//a[@href="/product_details/1"]');
         this.productInfo = this.getLocator('//div[@class="product-information"]');
-    }
+
+        this.searchBar = this.getLocator("#search_product");
+        this.searchBtn = this.getLocator("#submit_search");
+        this.productCount =this.getLocator('//div[@class="single-products"]');
+
+       
+    }  
 
     async navigateToProductPage():Promise<void>{
         await this.products.click();
@@ -50,20 +64,13 @@ export class ProductsPage extends BasePage{
         console.log(getDetails?.trim());
     }
 
+    async searchProduct(){
+      await  this.searchBar.fill("jeans")
+      await  this.searchBtn.click();
+        const size = await this.productCount.count();
+        console.log("Count matched with search | "+size)
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
 
 }

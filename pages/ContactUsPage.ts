@@ -1,5 +1,5 @@
 import {Page, expect,Locator} from '@playwright/test';
-import { BasePage } from './BasePage.spec';
+import { BasePage } from './BasePage';
 import { faker } from '@faker-js/faker';
 
 export class ContactUsPage extends BasePage{

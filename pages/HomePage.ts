@@ -1,5 +1,5 @@
 import {Page, expect, Locator} from '@playwright/test';
-import {BasePage} from './BasePage.spec';
+import {BasePage} from './BasePage';
 
 export class HomePage extends BasePage{
 
@@ -30,6 +30,8 @@ export class HomePage extends BasePage{
          console.log('Pages available on the Home Page:', pages);
 
     }
+
+
 
    
 }

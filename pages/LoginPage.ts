@@ -1,5 +1,5 @@
 import {Page,expect,Locator} from '@playwright/test';
-import {BasePage} from './BasePage.spec';
+import {BasePage} from './BasePage';
 
 export class LoginPage extends BasePage{
 
@@ -20,13 +20,15 @@ export class LoginPage extends BasePage{
         this.logoutButton =this.getLocator('a[href="/logout"]');
     }
 
-    async loginToApplication(email:string, password:string):Promise<void>{
+    async loginToApplication(email:string, pass:string):Promise<void>{
         await this.emailAddress.fill(email);
-        await this.password.fill(password);
+        await this.password.fill(pass);
+        console.log("UserName : "+this.emailAddress.inputValue()+", Password : "+this.password.inputValue())
         await this.loginButton.click();
     }
     async verifyLoginSuccess(): Promise<void>{
         await expect(this.verifyLogin).toBeVisible();
+        await this.page.waitForLoadState();
         console.log('Logged Account UserName | ',await this.verifyLogin.textContent());
         const pageTitle =await this.page.title();
         console.log('Page Title after login | ',pageTitle);

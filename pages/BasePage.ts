@@ -6,8 +6,9 @@ export abstract class BasePage {
         this.page=page;
     }
 
-    async gotoApplication(url:string): Promise<void>{
-       await this.page.goto(url);
+    async gotoApplication(): Promise<void>{
+          await this.page.goto('/');
+
     }
 
     async getPageTitle():Promise<string>{
@@ -21,5 +22,7 @@ export abstract class BasePage {
     await this.page.evaluate(() => {
         window.scrollTo(0, document.body.scrollHeight);
     });
+
+    
 }
 }
